@@ -49,7 +49,6 @@ export function createPrerenderPlugin({
 }: Options): Plugin {
 	// In server mode, it's always false and not updated later
 	let prerender = userOptions.output !== "server";
-	let cleaned = false;
 	let config: ResolvedConfig;
 
 	return {
@@ -129,8 +128,6 @@ export function createPrerenderPlugin({
 			},
 		},
 		async buildStart() {
-			if (cleaned) return;
-
 			// We can't just use build.emptyOutDir because it wouldn't necessarily run
 			// when changing the output mode. Instead we try clearing the parent folder
 			// if it's not the project root (eg. /dist/client => /dist/)
@@ -144,8 +141,6 @@ export function createPrerenderPlugin({
 					recursive: true,
 				});
 			}
-
-			cleaned = true;
 		},
 		buildApp: {
 			// Ensures environments are built by now
