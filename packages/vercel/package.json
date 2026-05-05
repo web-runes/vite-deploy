@@ -16,8 +16,8 @@
 		"types.d.ts"
 	],
 	"scripts": {
-		"dev": "tsgo --watch",
-		"build": "tsgo --build"
+		"dev": "tsgo --build --force --watch",
+		"build": "tsgo --build --force"
 	},
 	"keywords": [
 		"vite",

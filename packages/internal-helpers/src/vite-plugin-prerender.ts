@@ -188,11 +188,13 @@ export function createPrerenderPlugin({
 					const now = performance.now();
 
 					const previewServer = await preview({
+						root: serverEnvironment.config.root,
 						configFile: serverEnvironment.config.configFile,
 						preview: {
 							port: 0,
 							open: false,
 						},
+						logLevel: serverEnvironment.config.logLevel,
 					});
 					const localUrl = previewServer.resolvedUrls?.local.at(0);
 					if (!localUrl) {

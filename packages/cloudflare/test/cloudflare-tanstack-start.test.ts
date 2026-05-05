@@ -3,7 +3,6 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, describe, it } from "node:test";
 import {
-	allocatePort,
 	exampleDir,
 	runBuild,
 	type ServerHandle,
@@ -20,8 +19,6 @@ describe("cloudflare-tanstack-start", () => {
 			server = await startServer({
 				cwd,
 				mode: "dev",
-				port: allocatePort(),
-				timeoutMs: 90_000,
 			});
 		});
 		after(async () => server?.stop());
@@ -66,8 +63,6 @@ describe("cloudflare-tanstack-start", () => {
 			server = await startServer({
 				cwd,
 				mode: "preview",
-				port: allocatePort(),
-				timeoutMs: 90_000,
 			});
 		});
 		after(async () => server?.stop());

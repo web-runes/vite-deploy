@@ -3,7 +3,6 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { after, before, describe, it } from "node:test";
 import {
-	allocatePort,
 	exampleDir,
 	runBuild,
 	type ServerHandle,
@@ -16,7 +15,7 @@ describe("cloudflare-hono", () => {
 	describe("dev", () => {
 		let server: ServerHandle;
 		before(async () => {
-			server = await startServer({ cwd, mode: "dev", port: allocatePort() });
+			server = await startServer({ cwd, mode: "dev" });
 		});
 		after(async () => server?.stop());
 
@@ -56,7 +55,6 @@ describe("cloudflare-hono", () => {
 			server = await startServer({
 				cwd,
 				mode: "preview",
-				port: allocatePort(),
 			});
 		});
 		after(async () => server?.stop());
