@@ -10,7 +10,7 @@
 			"default": "./dist/index.js"
 		},
 		"./test": {
-			"default": "./dist/test.js"
+			"default": "./dist/test/index.js"
 		},
 		"./types": "./types.d.ts"
 	},
