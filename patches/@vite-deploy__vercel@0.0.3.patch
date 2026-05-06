@@ -1,8 +1,16 @@
 diff --git a/dist/vite-plugin.js b/dist/vite-plugin.js
-index c1c2b06e3c36bd1a35dee0e77bfad0c8ca4fed0d..aec77ff6ff1b0ede2314805b0b6729f921674c85 100644
+index c1c2b06e3c36bd1a35dee0e77bfad0c8ca4fed0d..90c9147bd070de1a98efdc2187991901a25a8c22 100644
 --- a/dist/vite-plugin.js
 +++ b/dist/vite-plugin.js
-@@ -37,7 +37,7 @@ function configPlugin(options) {
+@@ -30,14 +30,14 @@ function configPlugin(options) {
+             if (name === VITE_ENVIRONMENT_NAMES.client) {
+                 return {
+                     build: {
+-                        outDir: ".vercel/output/static",
++                        outDir: options.output === "static" ? "dist" : ".vercel/output/static",
+                     },
+                 };
+             }
              if (name === VITE_ENVIRONMENT_NAMES.server) {
                  return {
                      build: {
@@ -11,30 +19,15 @@ index c1c2b06e3c36bd1a35dee0e77bfad0c8ca4fed0d..aec77ff6ff1b0ede2314805b0b6729f9
                          rolldownOptions: {
                              input: {
                                  [MAIN_INPUT]: ENTRYPOINT_VIRTUAL_MODULE,
-@@ -88,7 +88,21 @@ export function vercel({ handlerEntrypoint, requestLoggingLevel, ...userOptions
+@@ -88,7 +88,6 @@ export function vercel({ handlerEntrypoint, requestLoggingLevel, ...userOptions
              userOptions,
              onBuildDone: async ({ output, serverEnvironment }) => {
                  const serverOutDir = join(serverEnvironment.config.root, serverEnvironment.config.build.outDir);
 -                await writeFile(join(serverOutDir, "../config.json"), JSON.stringify({ version: 3 }), "utf-8");
-+                await writeFile(join(serverOutDir, "../../config.json"), JSON.stringify({
-+                    version: 3,
-+                    framework: {
-+                        version: `${PACKAGE_NAME}@${packageJson.version}`
-+                    },
-+                    routes: [
-+                        {
-+                            handle: "filesystem"
-+                        },
-+                        {
-+                            src: "/.*",
-+                            dest: "__server"
-+                        }
-+                    ]
-+                }), "utf-8");
                  if (output === "static") {
                      // Clear server bundle
                      await rm(serverOutDir, {
-@@ -97,17 +111,67 @@ export function vercel({ handlerEntrypoint, requestLoggingLevel, ...userOptions
+@@ -97,17 +96,82 @@ export function vercel({ handlerEntrypoint, requestLoggingLevel, ...userOptions
                      });
                      return;
                  }
@@ -49,6 +42,21 @@ index c1c2b06e3c36bd1a35dee0e77bfad0c8ca4fed0d..aec77ff6ff1b0ede2314805b0b6729f9
 -                        supportsResponseStreaming: true,
 -                    }), "utf-8"),
 -                ]);
++                                await writeFile(join(serverOutDir, "../../config.json"), JSON.stringify({
++                    version: 3,
++                    framework: {
++                        version: `${PACKAGE_NAME}@${packageJson.version}`
++                    },
++                    routes: [
++                        {
++                            handle: "filesystem"
++                        },
++                        {
++                            src: "/.*",
++                            dest: "__server"
++                        }
++                    ]
++                }), "utf-8");
 +                const SUPPORTED_NODE_VERSIONS = {
 +	18: {
 +		status: 'deprecated',
