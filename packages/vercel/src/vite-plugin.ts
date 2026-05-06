@@ -10,6 +10,7 @@ import {
 import type { Plugin } from "vite";
 import packageJson from "../package.json" with { type: "json" };
 import type { ExportedHandler, Options } from "./types.js";
+import { getRuntime } from "./utils.js";
 
 const PACKAGE_NAME = packageJson.name;
 const MAIN_INPUT = "index";
@@ -24,7 +25,9 @@ function validateMod(mod: Record<string, any>) {
 	};
 }
 
-function configPlugin(options: Pick<Options, "handlerEntrypoint">): Plugin {
+function configPlugin(
+	options: Pick<Options, "handlerEntrypoint" | "output">,
+): Plugin {
 	return {
 		name: `${PACKAGE_NAME}:config`,
 		sharedDuringBuild: true,
@@ -42,14 +45,15 @@ function configPlugin(options: Pick<Options, "handlerEntrypoint">): Plugin {
 			if (name === VITE_ENVIRONMENT_NAMES.client) {
 				return {
 					build: {
-						outDir: ".vercel/output/static",
+						outDir:
+							options.output === "static" ? "dist" : ".vercel/output/static",
 					},
 				};
 			}
 			if (name === VITE_ENVIRONMENT_NAMES.server) {
 				return {
 					build: {
-						outDir: ".vercel/output/render.func",
+						outDir: ".vercel/output/functions/__server.func",
 						rolldownOptions: {
 							input: {
 								[MAIN_INPUT]: ENTRYPOINT_VIRTUAL_MODULE,
@@ -78,7 +82,7 @@ export function vercel({
 	...userOptions
 }: Options): Array<Plugin> {
 	return [
-		configPlugin({ handlerEntrypoint }),
+		configPlugin({ handlerEntrypoint, output: userOptions.output }),
 		createBuildPlugin(),
 		createHandlerPlugin({
 			requestLoggingLevel,
@@ -112,12 +116,6 @@ export function vercel({
 					serverEnvironment.config.build.outDir,
 				);
 
-				await writeFile(
-					join(serverOutDir, "../config.json"),
-					JSON.stringify({ version: 3 }),
-					"utf-8",
-				);
-
 				if (output === "static") {
 					// Clear server bundle
 					await rm(serverOutDir, {
@@ -127,25 +125,39 @@ export function vercel({
 					return;
 				}
 
-				await Promise.all([
-					// TODO: investigate if needed, taken from Astro
-					// Force ESM?
-					writeFile(
-						join(serverOutDir, "package.json"),
-						JSON.stringify({ type: "module" }),
-						"utf-8",
-					),
-					writeFile(
-						join(serverOutDir, ".vc-config.json"),
-						JSON.stringify({
-							runtime: "nodejs",
-							handler: `${MAIN_INPUT}.mjs`,
-							launcherType: "Nodejs",
-							supportsResponseStreaming: true,
+				await writeFile(
+					join(serverOutDir, "../../config.json"),
+					JSON.stringify({
+						version: 3,
+						framework: {
+							version: `${PACKAGE_NAME}@${packageJson.version}`,
+						},
+						routes: [
+							{
+								handle: "filesystem",
+							},
+							{
+								src: "/.*",
+								dest: "__server",
+							},
+						],
+					}),
+					"utf-8",
+				);
+
+				await writeFile(
+					join(serverOutDir, ".vc-config.json"),
+					JSON.stringify({
+						runtime: getRuntime({
+							nodeVersion: process.version,
+							warn: serverEnvironment.logger.warn,
 						}),
-						"utf-8",
-					),
-				]);
+						handler: `${MAIN_INPUT}.mjs`,
+						launcherType: "Nodejs",
+						supportsResponseStreaming: true,
+					}),
+					"utf-8",
+				);
 			},
 		}),
 	];

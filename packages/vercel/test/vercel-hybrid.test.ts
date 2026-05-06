@@ -43,7 +43,11 @@ describe("vercel-hybrid", () => {
 		});
 
 		it("emits server function for dynamic routes", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/render.func/index.mjs")));
+			assert.ok(
+				existsSync(
+					join(cwd, ".vercel/output/functions/__server.func/index.mjs"),
+				),
+			);
 		});
 	});
 
