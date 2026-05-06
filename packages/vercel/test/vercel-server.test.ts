@@ -37,11 +37,11 @@ describe("vercel-server", () => {
 		before(async () => runBuild(cwd));
 
 		it("emits client output", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/static/favicon.svg")));
+			assert.ok(existsSync(join(cwd, "dist/favicon.svg")));
 		});
 
 		it("emits server function", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/render.func/index.mjs")));
+			assert.ok(existsSync(join(cwd, ".vercel/output/server.func/index.mjs")));
 		});
 	});
 

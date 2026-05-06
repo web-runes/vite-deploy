@@ -40,17 +40,17 @@ describe("vercel-tanstack-start", () => {
 		before(async () => runBuild(cwd));
 
 		it("prerenders / to client output", () => {
-			const indexPath = join(cwd, ".vercel/output/static/index.html");
+			const indexPath = join(cwd, "dist/index.html");
 			assert.ok(existsSync(indexPath));
 			assert.match(readFileSync(indexPath, "utf8"), /Welcome Home!!!/);
 		});
 
 		it("emits hashed client assets", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/static/assets")));
+			assert.ok(existsSync(join(cwd, "dist/assets")));
 		});
 
 		it("emits server function for dynamic routes", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/render.func/index.mjs")));
+			assert.ok(existsSync(join(cwd, ".vercel/output/server.func/index.mjs")));
 		});
 	});
 
