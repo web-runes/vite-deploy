@@ -49,7 +49,7 @@ function configPlugin(options: Pick<Options, "handlerEntrypoint">): Plugin {
 			if (name === VITE_ENVIRONMENT_NAMES.server) {
 				return {
 					build: {
-						outDir: ".vercel/output/server.func",
+						outDir: ".vercel/output/functions/server.func",
 						rolldownOptions: {
 							input: {
 								[MAIN_INPUT]: ENTRYPOINT_VIRTUAL_MODULE,

@@ -2,6 +2,9 @@ packages:
   - docs
   - examples/*
   - packages/*
+patchedDependencies:
+  '@vite-deploy/vercel@0.0.3': patches/@vite-deploy__vercel@0.0.3.patch
+
 #linkWorkspacePackages: true
 #preferWorkspacePackages: true
 # This prevents the examples to have the `workspace:` prefix

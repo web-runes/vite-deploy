@@ -43,7 +43,7 @@ describe("vercel-static", () => {
 		});
 
 		it("does not emit server function", () => {
-			assert.ok(!existsSync(join(cwd, ".vercel/output/server.func/index.mjs")));
+			assert.ok(!existsSync(join(cwd, ".vercel/output/functions/server.func/index.mjs")));
 		});
 	});
 
