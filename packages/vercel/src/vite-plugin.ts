@@ -24,7 +24,9 @@ function validateMod(mod: Record<string, any>) {
 	};
 }
 
-function configPlugin(options: Pick<Options, "handlerEntrypoint">): Plugin {
+function configPlugin(
+	options: Pick<Options, "handlerEntrypoint" | "output">,
+): Plugin {
 	return {
 		name: `${PACKAGE_NAME}:config`,
 		sharedDuringBuild: true,
@@ -42,14 +44,15 @@ function configPlugin(options: Pick<Options, "handlerEntrypoint">): Plugin {
 			if (name === VITE_ENVIRONMENT_NAMES.client) {
 				return {
 					build: {
-						outDir: ".vercel/output/static",
+						outDir:
+							options.output === "static" ? "dist" : ".vercel/output/static",
 					},
 				};
 			}
 			if (name === VITE_ENVIRONMENT_NAMES.server) {
 				return {
 					build: {
-						outDir: ".vercel/output/functions/server.func",
+						outDir: ".vercel/output/functions/__server.func",
 						rolldownOptions: {
 							input: {
 								[MAIN_INPUT]: ENTRYPOINT_VIRTUAL_MODULE,
@@ -78,7 +81,7 @@ export function vercel({
 	...userOptions
 }: Options): Array<Plugin> {
 	return [
-		configPlugin({ handlerEntrypoint }),
+		configPlugin({ handlerEntrypoint, output: userOptions.output }),
 		createBuildPlugin(),
 		createHandlerPlugin({
 			requestLoggingLevel,
@@ -112,12 +115,6 @@ export function vercel({
 					serverEnvironment.config.build.outDir,
 				);
 
-				await writeFile(
-					join(serverOutDir, "../config.json"),
-					JSON.stringify({ version: 3 }),
-					"utf-8",
-				);
-
 				if (output === "static") {
 					// Clear server bundle
 					await rm(serverOutDir, {
@@ -127,25 +124,114 @@ export function vercel({
 					return;
 				}
 
-				await Promise.all([
-					// TODO: investigate if needed, taken from Astro
-					// Force ESM?
-					writeFile(
-						join(serverOutDir, "package.json"),
-						JSON.stringify({ type: "module" }),
-						"utf-8",
-					),
-					writeFile(
-						join(serverOutDir, ".vc-config.json"),
-						JSON.stringify({
-							runtime: "nodejs",
-							handler: `${MAIN_INPUT}.mjs`,
-							launcherType: "Nodejs",
-							supportsResponseStreaming: true,
-						}),
-						"utf-8",
-					),
-				]);
+				await writeFile(
+					join(serverOutDir, "../../config.json"),
+					JSON.stringify({
+						version: 3,
+						framework: {
+							version: `${PACKAGE_NAME}@${packageJson.version}`,
+						},
+						routes: [
+							{
+								handle: "filesystem",
+							},
+							{
+								src: "/.*",
+								dest: "__server",
+							},
+						],
+					}),
+					"utf-8",
+				);
+
+				// https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/node-js#node.js-version
+				const SUPPORTED_NODE_VERSIONS: Record<
+					string,
+					| {
+							status: "default";
+					  }
+					| {
+							status: "available";
+					  }
+					| {
+							status: "beta";
+					  }
+					| {
+							status: "retiring";
+							removal: Date | string;
+							warnDate: Date;
+					  }
+					| {
+							status: "deprecated";
+					  }
+				> = {
+					18: {
+						status: "deprecated",
+					},
+					20: {
+						status: "available",
+					},
+					22: {
+						status: "available",
+					},
+					24: {
+						status: "default",
+					},
+				};
+				function getRuntime(
+					process: NodeJS.Process,
+					logger: typeof console,
+				): `nodejs${string}.x` {
+					const version = process.version.slice(1); // 'v18.19.0' --> '18.19.0'
+					const major = version.split(".")[0]; // '18.19.0' --> '18'
+					const support = SUPPORTED_NODE_VERSIONS[major];
+					if (support === undefined) {
+						logger.warn(
+							`\n` +
+								`\tThe local Node.js version (${major}) is not supported by Vercel Serverless Functions.\n` +
+								`\tYour project will use Node.js 24 as the runtime instead.\n` +
+								`\tConsider switching your local version to 24.\n`,
+						);
+						return "nodejs24.x";
+					}
+					if (support.status === "default" || support.status === "available") {
+						return `nodejs${major}.x`;
+					}
+					if (support.status === "retiring") {
+						if (support.warnDate && new Date() >= support.warnDate) {
+							logger.warn(
+								`Your project is being built for Node.js ${major} as the runtime, which is retiring by ${support.removal}.`,
+							);
+						}
+						return `nodejs${major}.x`;
+					}
+					if (support.status === "beta") {
+						logger.warn(
+							`Your project is being built for Node.js ${major} as the runtime, which is currently in beta for Vercel Serverless Functions.`,
+						);
+						return `nodejs${major}.x`;
+					}
+					if (support.status === "deprecated") {
+						logger.warn(
+							`\n` +
+								`\tYour project is being built for Node.js ${major} as the runtime.\n` +
+								`\tThis version is deprecated by Vercel Serverless Functions.\n` +
+								`\tConsider upgrading your local version to 24.\n`,
+						);
+						return `nodejs${major}.x`;
+					}
+					return "nodejs24.x";
+				}
+				await writeFile(
+					join(serverOutDir, ".vc-config.json"),
+					JSON.stringify({
+						runtime: getRuntime(process, console),
+						handler: `${MAIN_INPUT}.mjs`,
+						launcherType: "Nodejs",
+						supportsResponseStreaming: true,
+					}),
+					"utf-8",
+				);
 			},
 		}),
 	];

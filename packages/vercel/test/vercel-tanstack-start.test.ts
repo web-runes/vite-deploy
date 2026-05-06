@@ -50,7 +50,7 @@ describe("vercel-tanstack-start", () => {
 		});
 
 		it("emits server function for dynamic routes", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/functions/server.func/index.mjs")));
+			assert.ok(existsSync(join(cwd, ".vercel/output/functions/__server.func/index.mjs")));
 		});
 	});
 
