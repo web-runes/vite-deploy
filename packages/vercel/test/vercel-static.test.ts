@@ -37,13 +37,17 @@ describe("vercel-static", () => {
 		before(async () => runBuild(cwd));
 
 		it("prerenders / to client output", () => {
-			const indexPath = join(cwd, ".vercel/output/static/index.html");
+			const indexPath = join(cwd, "dist/index.html");
 			assert.ok(existsSync(indexPath));
 			assert.match(readFileSync(indexPath, "utf8"), /<div>foo<\/div>/);
 		});
 
 		it("does not emit server function", () => {
-			assert.ok(!existsSync(join(cwd, ".vercel/output/functions/__server.func/index.mjs")));
+			assert.ok(
+				!existsSync(
+					join(cwd, ".vercel/output/functions/__server.func/index.mjs"),
+				),
+			);
 		});
 	});
 

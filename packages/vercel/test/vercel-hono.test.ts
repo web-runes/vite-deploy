@@ -41,7 +41,11 @@ describe("vercel-hono", () => {
 		});
 
 		it("emits server function", () => {
-			assert.ok(existsSync(join(cwd, ".vercel/output/functions/__server.func/index.mjs")));
+			assert.ok(
+				existsSync(
+					join(cwd, ".vercel/output/functions/__server.func/index.mjs"),
+				),
+			);
 		});
 	});
 
