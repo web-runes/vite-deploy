@@ -44,19 +44,19 @@ export default defineConfig({
 				},
 				{
 					label: "Adapters reference",
-					autogenerate: { directory: "adapters" },
+					items: [{ autogenerate: { directory: "adapters" } }],
 				},
 				// {
 				//   label: "How-to guides",
-				//   autogenerate: { directory: "how-to" },
+				//   items: [{ autogenerate: { directory: "how-to" } }],
 				// },
 				{
 					label: "Deployment guides",
-					autogenerate: { directory: "deploy" },
+					items: [{ autogenerate: { directory: "deploy" } }],
 				},
 				{
 					label: "Integration guides",
-					autogenerate: { directory: "integrate-with" },
+					items: [{ autogenerate: { directory: "integrate-with" } }],
 				},
 			],
 			customCss: ["./src/styles/custom.css"],

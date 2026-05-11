@@ -39,13 +39,13 @@
 		"vite": "^8.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.6.0",
-		"@typescript/native-preview": "7.0.0-dev.20260503.1"
+		"@types/node": "^25.6.2",
+		"@typescript/native-preview": "7.0.0-dev.20260510.1"
 	},
 	"dependencies": {
 		"@netlify/functions": "^5.2.0",
 		"@netlify/vite-plugin": "^2.12.1",
 		"@remix-run/node-fetch-server": "^0.13.1",
-		"@vite-deploy/internal-helpers": "^0.1.0"
+		"@vite-deploy/internal-helpers": "^0.1.1"
 	}
 }
