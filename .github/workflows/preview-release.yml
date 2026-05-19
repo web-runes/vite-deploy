@@ -20,7 +20,7 @@ jobs:
   preview:
     # Only allow preview releases from branches in the same repo (not forks)
     if: >-
-      github.repository_owner == 'withastro' &&
+      github.repository_owner == 'web-runes' &&
       github.event.label.name == 'pr preview' &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
