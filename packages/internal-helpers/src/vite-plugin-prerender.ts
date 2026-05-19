@@ -184,6 +184,7 @@ export function createPrerenderPlugin({
 					);
 					// TODO: consider allow generators so that prerendering some routes
 					// can discover more routes. or a context based API like ctx.enqueue(...urls)
+					// TODO: whatever
 					const paths = normalizePaths(
 						await getStaticPaths(prerenderEntrypointMod),
 					);
