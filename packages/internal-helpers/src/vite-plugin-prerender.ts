@@ -13,12 +13,12 @@ import packageJson from "../package.json" with { type: "json" };
 import { VITE_ENVIRONMENT_NAMES } from "./constants.js";
 import type { PrerenderOptions } from "./types.js";
 import {
+	forEachBatch,
 	getRouteFilename,
 	getStaticPaths,
 	getTimeStat,
 	isRedirectResponse,
 	localFetch,
-	normalizePaths,
 } from "./utils.js";
 
 const PACKAGE_NAME = packageJson.name;
@@ -182,16 +182,7 @@ export function createPrerenderPlugin({
 							`${PRERENDER_INPUT}.mjs`,
 						)
 					);
-					// TODO: consider allow generators so that prerendering some routes
-					// can discover more routes. or a context based API like ctx.enqueue(...urls)
-					// TODO: whatever
-					const paths = normalizePaths(
-						await getStaticPaths(prerenderEntrypointMod),
-					);
 
-					serverEnvironment.logger.info(
-						`\nprerendering (${paths.length} route${paths.length === 1 ? "" : "s"})...\n`,
-					);
 					const now = performance.now();
 
 					const previewServer = await preview({
@@ -209,49 +200,61 @@ export function createPrerenderPlugin({
 					}
 					const baseUrl = new URL(localUrl);
 
-					for (const path of paths) {
-						const res = await localFetch({
-							path,
-							baseUrl,
-							warn: serverEnvironment.logger.warn,
-							fetch: globalThis.fetch,
-							options: {
-								headers: userOptions.prerender.headers,
-							},
-						});
+					await forEachBatch(
+						getStaticPaths(prerenderEntrypointMod),
+						async (paths) => {
+							serverEnvironment.logger.info(
+								`\nprerendering (${paths.length} route${paths.length === 1 ? "" : "s"})...\n`,
+							);
 
-						if (!res.ok) {
-							if (isRedirectResponse(res)) {
-								serverEnvironment.logger.warn(
-									`Max redirects reached for ${path}`,
+							for (const path of paths) {
+								const res = await localFetch({
+									path,
+									baseUrl,
+									warn: serverEnvironment.logger.warn,
+									fetch: globalThis.fetch,
+									options: {
+										headers: userOptions.prerender?.headers,
+									},
+								});
+
+								if (!res.ok) {
+									if (isRedirectResponse(res)) {
+										serverEnvironment.logger.warn(
+											`Max redirects reached for ${path}`,
+										);
+									}
+									throw new Error(
+										`Failed to fetch ${path}: ${res.statusText}`,
+										{
+											cause: res,
+										},
+									);
+								}
+
+								const cleanPagePath = path.split(/[?#]/)[0];
+
+								const filename = getRouteFilename({
+									path: cleanPagePath,
+									format: userOptions.prerender?.format ?? "file",
+									htmlContentType: !!res.headers
+										.get("content-type")
+										?.includes("html"),
+								});
+
+								const html = await res.text();
+
+								const filepath = join(
+									clientEnvironment.config.root,
+									clientEnvironment.config.build.outDir,
+									filename,
 								);
+
+								await mkdir(dirname(filepath), { recursive: true });
+								await writeFile(filepath, html);
 							}
-							throw new Error(`Failed to fetch ${path}: ${res.statusText}`, {
-								cause: res,
-							});
-						}
-
-						const cleanPagePath = path.split(/[?#]/)[0];
-
-						const filename = getRouteFilename({
-							path: cleanPagePath,
-							format: userOptions.prerender.format ?? "file",
-							htmlContentType: !!res.headers
-								.get("content-type")
-								?.includes("html"),
-						});
-
-						const html = await res.text();
-
-						const filepath = join(
-							clientEnvironment.config.root,
-							clientEnvironment.config.build.outDir,
-							filename,
-						);
-
-						await mkdir(dirname(filepath), { recursive: true });
-						await writeFile(filepath, html);
-					}
+						},
+					);
 
 					await previewServer.close();
 					serverEnvironment.logger.info(
