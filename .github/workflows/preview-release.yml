@@ -61,6 +61,7 @@ jobs:
       - name: Get changeset status
         id: changeset-status
         run: |
+          git branch --track main origin/main
           pnpm changeset status --output changes.json
           echo "changes-output=$(cat changes.json | jq -c .)" >> $GITHUB_OUTPUT
 
