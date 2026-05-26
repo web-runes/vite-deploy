@@ -20,5 +20,6 @@
 			"enabled": false
 		}
 	],
-	"ignorePaths": ["**/node_modules/**", "**/bower_components/**"]
+	"ignorePaths": ["**/node_modules/**", "**/bower_components/**"],
+	"minimumReleaseAge": "1 day"
 }
