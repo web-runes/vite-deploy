@@ -21,5 +21,6 @@
 		}
 	],
 	"ignorePaths": ["**/node_modules/**", "**/bower_components/**"],
-	"minimumReleaseAge": "1 day"
+	"minimumReleaseAge": "1 day",
+	"ignoreDeps": ["tailwind-merge", "zod"]
 }
