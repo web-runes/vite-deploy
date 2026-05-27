@@ -214,6 +214,45 @@ export default defineConfig({
 });
 ```
 
+## Context
+
+You can access [Vercel-specific context](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#helper-methods-non-next.js-usage-or-older-next.js-versions) through the `@vercel/functions` package:
+
+1. Add `@vercel/functions` to your project's dependencies using your preferred package manager: 
+
+    <PackageManagerTabs>
+      <Fragment slot="npm">
+        ```sh
+        npm install @vercel/functions
+        ```
+      </Fragment>
+      <Fragment slot="pnpm">
+        ```sh
+        pnpm add @vercel/functions
+        ```
+      </Fragment>
+      <Fragment slot="yarn">
+        ```sh
+        yarn add @vercel/functions
+        ```
+      </Fragment>
+    </PackageManagerTabs>
+
+2. Import the package:
+
+    ```ts title="src/handler.ts" {1,6}
+    import type { ExportedHandler } from "@vite-deploy/vercel";
+    import { getEnv } from "@vercel/functions";
+
+    export default {
+      fetch(request) {
+        const { VERCEL_REGION } = getEnv();
+        const url = new URL(request.url);
+        return new Response(`Running ${url.pathname} in ${navigator.userAgent}!`);
+      },
+    } satisfies ExportedHandler;
+    ```
+
 ## Static assets
 
 Static assets work out of the box. The adapter injects a header to cache assets under [`build.assetsDir`](https://vite.dev/config/build-options#build-assetsdir).
