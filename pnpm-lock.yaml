@@ -175,7 +175,7 @@ importers:
         specifier: 7.0.0-dev.20260524.1
         version: 7.0.0-dev.20260524.1
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       vite:
         specifier: ^8.0.14
@@ -191,7 +191,7 @@ importers:
         specifier: 7.0.0-dev.20260524.1
         version: 7.0.0-dev.20260524.1
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       vite:
         specifier: ^8.0.14
@@ -203,7 +203,7 @@ importers:
         specifier: 7.0.0-dev.20260524.1
         version: 7.0.0-dev.20260524.1
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       vite:
         specifier: ^8.0.14
@@ -215,7 +215,7 @@ importers:
         specifier: 7.0.0-dev.20260524.1
         version: 7.0.0-dev.20260524.1
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       vite:
         specifier: ^8.0.14
@@ -227,7 +227,7 @@ importers:
         specifier: 7.0.0-dev.20260524.1
         version: 7.0.0-dev.20260524.1
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       vite:
         specifier: ^8.0.14
@@ -270,7 +270,7 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.15)
       '@vite-deploy/netlify':
-        specifier: ^0.2.0
+        specifier: ^0.3.0
         version: link:../../packages/netlify
       '@vitejs/plugin-react':
         specifier: ^6.0.2
