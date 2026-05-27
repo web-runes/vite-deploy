@@ -1,5 +1,13 @@
 # @vite-deploy/netlify
 
+## 0.3.0
+
+### Minor Changes
+
+- [#41](https://github.com/web-runes/vite-deploy/pull/41) [`cee16cb`](https://github.com/web-runes/vite-deploy/commit/cee16cbd50ef5999f08b7bc92321a4142ca6d4da) Thanks [@florian-lefebvre](https://github.com/florian-lefebvre)! - Improves support for `Netlify.context`
+
+  Within request scope, `Netlify.context` is now set. When not on Netlify nor used through the [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/), context properties are emulated.
+
 ## 0.2.0
 
 ### Minor Changes
