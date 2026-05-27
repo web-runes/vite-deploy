@@ -237,6 +237,41 @@ export default defineConfig({
 });
 ```
 
+## Context
+
+You can access [Netlify-specific context](https://docs.netlify.com/build/functions/api/#netlify-specific-context-object) in 2 ways:
+
+- From the 2nd argument of [`handlerEntrypoint`](#handlerentrypoint)'s fetch handler:
+
+  ```ts title="src/handler.ts" "context"
+  import type { ExportedHandler } from "@vite-deploy/netlify";
+
+  export default {
+    fetch(request, context) {
+      const url = new URL(request.url);
+      return new Response(`Running ${url.pathname} in ${navigator.userAgent}!`);
+    },
+  } satisfies ExportedHandler;
+  ```
+
+- From the [`Netlify` global](https://docs.netlify.com/build/functions/api/#netlify-global-object):
+
+  ```ts title="src/handler.ts" "Netlify.context"
+  import type { ExportedHandler } from "@vite-deploy/netlify";
+
+  export default {
+    fetch(request) {
+      Netlify.context;
+      const url = new URL(request.url);
+      return new Response(`Running ${url.pathname} in ${navigator.userAgent}!`);
+    },
+  } satisfies ExportedHandler;
+  ```
+
+  `Netlify.context` is only set within request scope, otherwise it is `null`.
+
+When not on Netlify nor used through the [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/), context properties are emulated.
+
 ## Static assets
 
 Static assets work out of the box. The adapter injects a header to cache assets under [`build.assetsDir`](https://vite.dev/config/build-options#build-assetsdir).
