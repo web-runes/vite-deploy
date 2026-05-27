@@ -1,5 +1,6 @@
 import { rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import type { Context } from "@netlify/functions";
 import netlifyPlugin from "@netlify/vite-plugin";
 import {
 	createBuildPlugin,
@@ -143,7 +144,7 @@ export function netlify({
 				try {
 					request = new NodeRequest({ req, res });
 
-					const response = await mod.default.fetch(request, {
+					const context: Context = {
 						get url() {
 							// biome-ignore lint/style/noNonNullAssertion: request is defined at this stage
 							return new URL(request!.url);
@@ -254,7 +255,15 @@ export function netlify({
 								"`context.rewrite` is deprecated by Netlify, and not implemented.",
 							);
 						},
-					});
+					};
+					Netlify = {
+						get context() {
+							return context;
+						},
+						env: Netlify.env,
+					};
+
+					const response = await mod.default.fetch(request, context);
 					await sendNodeResponse(res, response);
 
 					return { type: "success" };
