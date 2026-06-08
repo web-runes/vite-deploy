@@ -14,8 +14,8 @@
 		"srvx": "^0.11.16"
 	},
 	"devDependencies": {
-		"@typescript/native-preview": "7.0.0-dev.20260524.1",
+		"@typescript/native-preview": "7.0.0-dev.20260606.1",
 		"@vite-deploy/node": "^0.0.5",
-		"vite": "^8.0.14"
+		"vite": "^8.0.16"
 	}
 }
