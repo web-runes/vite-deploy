@@ -73,7 +73,11 @@ export interface PrerenderEntrypoint {
 	/**
 	 * Lists URLs to prerender.
 	 */
-	getStaticPaths: () => Array<string> | Promise<Array<string>>;
+	getStaticPaths: () =>
+		| Array<string>
+		| Promise<Array<string>>
+		| Generator<Array<string>, void, undefined>
+		| AsyncGenerator<Array<string>, void, undefined>;
 }
 
 export type Entrypoint = string | URL;
