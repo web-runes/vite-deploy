@@ -12,7 +12,7 @@ We welcome contributions of any size and skill level. As an open source project,
 
 ```shell
 node: "^>=22.12.0"
-pnpm: "^10.33.2"
+pnpm: "^11.5.2"
 # otherwise, your build will fail
 ```
 
@@ -41,7 +41,7 @@ pnpm build
 
 During the development process, you may want to test your changes to ensure they are working as expected. Here are a few ways to do it:
 
-1. Run any of the examples in the `/examples` folder. They are linked to use the local pckages, so you can see the effects of your changes.
+1. Run any of the examples in the `/examples` folder. They are linked to use the local packages, so you can see the effects of your changes.
 
    ```shell
     pnpm --filter @example/cloudflare-static run dev
