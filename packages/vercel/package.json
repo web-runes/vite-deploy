@@ -39,8 +39,8 @@
 		"vite": "^8.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.9.2",
-		"@typescript/native-preview": "7.0.0-dev.20260606.1"
+		"@types/node": "^25.9.3",
+		"@typescript/native-preview": "7.0.0-dev.20260613.1"
 	},
 	"dependencies": {
 		"@vite-deploy/internal-helpers": "^0.2.0",

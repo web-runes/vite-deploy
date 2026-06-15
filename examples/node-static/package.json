@@ -10,7 +10,7 @@
 		"start": "node dist/server/index.mjs"
 	},
 	"devDependencies": {
-		"@typescript/native-preview": "7.0.0-dev.20260606.1",
+		"@typescript/native-preview": "7.0.0-dev.20260613.1",
 		"@vite-deploy/node": "^0.0.5",
 		"vite": "^8.0.16"
 	}
