@@ -11,3 +11,5 @@ linkWorkspacePackages: true
 preferWorkspacePackages: true
 # This prevents the examples to have the `workspace:` prefix
 saveWorkspaceProtocol: false
+overrides:
+  'vite-plugin-astro>@astrojs/internal-helpers': 'file:../../withastro/astro/packages/internal-helpers'

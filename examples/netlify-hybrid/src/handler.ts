@@ -1,4 +1,7 @@
 import type { ExportedHandler } from "@vite-deploy/netlify";
+import * as Test from './Test.astro'
+
+console.log(Test.default())
 
 export default {
 	fetch(request, context) {
