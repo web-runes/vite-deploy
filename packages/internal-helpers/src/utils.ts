@@ -1,31 +1,71 @@
-import type { Format } from "./types.js";
+import type { Format, PrerenderEntrypoint } from "./types.js";
 
-export async function getStaticPaths(
-	mod: Record<string, any>,
-): Promise<Array<string>> {
+export function validatePrerenderMod(mod: Record<string, any>) {
 	if (!("default" in mod && "getStaticPaths" in mod.default)) {
 		throw new Error("Prerender entrypoint returns an invalid shape");
 	}
-	const paths = await mod.default.getStaticPaths();
+
+	return mod as {
+		default: PrerenderEntrypoint;
+	};
+}
+
+function isGenerator(
+	value: unknown,
+): value is
+	| Generator<Array<string>, void, undefined>
+	| AsyncGenerator<Array<string>, void, undefined> {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		(Symbol.iterator in value || Symbol.asyncIterator in value) &&
+		"next" in value &&
+		typeof (value as { next: unknown }).next === "function"
+	);
+}
+
+function validatePaths(paths: Array<string>) {
 	if (!Array.isArray(paths) || !paths.every((e) => typeof e === "string")) {
 		throw new Error(
 			"Paths returned by getStaticPaths() are not an array of strings",
 		);
 	}
-	return paths;
 }
 
-export function normalizePaths(input: Array<string>): Array<string> {
-	return [
-		...new Set(
-			input.map((path) => {
-				if (path[0] !== "/") {
-					path = `/${path}`;
-				}
-				return path;
-			}),
-		),
-	];
+export async function* getStaticPaths(
+	unsafeMod: Record<string, any>,
+): AsyncGenerator<Array<string>, void, undefined> {
+	const mod = validatePrerenderMod(unsafeMod).default;
+	const result = await mod.getStaticPaths();
+	if (isGenerator(result)) {
+		for await (const paths of result) {
+			validatePaths(paths);
+			yield paths;
+		}
+		return;
+	}
+	validatePaths(result);
+	yield result;
+}
+
+export async function forEachBatch(
+	generator: ReturnType<typeof getStaticPaths>,
+	cb: (batch: Array<string>) => Promise<void>,
+): Promise<void> {
+	const seen = new Set<string>();
+	for await (const batch of generator) {
+		const paths: Array<string> = [];
+		for (let candidate of batch) {
+			if (candidate[0] !== "/") {
+				candidate = `/${candidate}`;
+			}
+			if (!seen.has(candidate)) {
+				paths.push(candidate);
+				seen.add(candidate);
+			}
+		}
+		await cb(paths);
+	}
 }
 
 export function getTimeStat(buildTime: number): string {
