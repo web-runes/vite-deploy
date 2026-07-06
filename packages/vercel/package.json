@@ -16,8 +16,8 @@
 		"types.d.ts"
 	],
 	"scripts": {
-		"dev": "tsgo --build --force --watch",
-		"build": "tsgo --build --force",
+		"dev": "tsc --build --force --watch",
+		"build": "tsc --build --force",
 		"test": "node --test --test-reporter=spec --test-concurrency=1 --test-force-exit \"test/**/*.test.ts\""
 	},
 	"keywords": [
@@ -40,7 +40,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^25.9.4",
-		"@typescript/native-preview": "7.0.0-dev.20260704.1"
+		"typescript": "7.0.1-rc"
 	},
 	"dependencies": {
 		"@vite-deploy/internal-helpers": "^0.2.0",

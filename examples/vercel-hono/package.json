@@ -5,15 +5,15 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsgo && vite build",
+		"build": "tsc && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
 		"hono": "^4.12.27"
 	},
 	"devDependencies": {
-		"@typescript/native-preview": "7.0.0-dev.20260704.1",
 		"@vite-deploy/vercel": "^0.2.0",
+		"typescript": "7.0.1-rc",
 		"vite": "^8.1.3"
 	}
 }

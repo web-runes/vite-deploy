@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsgo && vite build",
+		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"start": "node dist/server/index.mjs"
 	},
@@ -15,8 +15,8 @@
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.6",
-		"@typescript/native-preview": "7.0.0-dev.20260704.1",
 		"@vite-deploy/node": "^0.0.5",
+		"typescript": "7.0.1-rc",
 		"vite": "^8.1.3"
 	}
 }
