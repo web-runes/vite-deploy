@@ -41,7 +41,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^25.9.4",
-		"@typescript/native-preview": "7.0.0-dev.20260620.1"
+		"@typescript/native-preview": "7.0.0-dev.20260704.1"
 	},
 	"dependencies": {
 		"sirv": "^3.0.2"
