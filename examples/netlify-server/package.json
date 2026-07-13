@@ -10,7 +10,7 @@
 	},
 	"devDependencies": {
 		"@vite-deploy/netlify": "^0.3.0",
-		"typescript": "7.0.1-rc",
-		"vite": "^8.1.3"
+		"typescript": "7.0.2",
+		"vite": "^8.1.4"
 	}
 }

@@ -40,11 +40,11 @@
 		"wrangler": "^4.76.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.9.4",
-		"typescript": "7.0.1-rc"
+		"@types/node": "^25.9.5",
+		"typescript": "7.0.2"
 	},
 	"dependencies": {
-		"@cloudflare/vite-plugin": "^1.43.0",
+		"@cloudflare/vite-plugin": "^1.44.0",
 		"@vite-deploy/internal-helpers": "^0.2.0"
 	}
 }
