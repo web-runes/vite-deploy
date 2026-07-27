@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"hono": "^4.12.31"
+		"hono": "^4.12.32"
 	},
 	"devDependencies": {
 		"@vite-deploy/netlify": "^0.3.0",

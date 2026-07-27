@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"sirv": "^3.0.2",
-		"srvx": "^0.11.22"
+		"srvx": "^0.12.4"
 	},
 	"devDependencies": {
 		"@vite-deploy/node": "^0.0.5",
