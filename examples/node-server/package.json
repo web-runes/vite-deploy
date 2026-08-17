@@ -14,7 +14,7 @@
 		"srvx": "^0.12.5"
 	},
 	"devDependencies": {
-		"@vite-deploy/node": "^0.0.5",
+		"@vite-deploy/node": "^0.0.6",
 		"typescript": "7.0.2",
 		"vite": "^8.2.1"
 	}

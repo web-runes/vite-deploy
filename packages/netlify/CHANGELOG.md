@@ -1,5 +1,13 @@
 # @vite-deploy/netlify
 
+## 0.3.1
+
+### Patch Changes
+
+- [#60](https://github.com/web-runes/vite-deploy/pull/60) [`3b24ba0`](https://github.com/web-runes/vite-deploy/commit/3b24ba099ae768c67b2b34e17a1bcf64aaf37fe4) Thanks [@renovate](https://github.com/apps/renovate)! - Updates dependencies
+- Updated dependencies [[`3b24ba0`](https://github.com/web-runes/vite-deploy/commit/3b24ba099ae768c67b2b34e17a1bcf64aaf37fe4)]:
+  - @vite-deploy/internal-helpers@0.2.1
+
 ## 0.3.0
 
 ### Minor Changes

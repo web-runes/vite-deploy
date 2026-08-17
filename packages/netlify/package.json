@@ -1,6 +1,6 @@
 {
 	"name": "@vite-deploy/netlify",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Deploy your Vite project to Netlify.",
 	"type": "module",
 	"sideEffects": false,
@@ -45,7 +45,7 @@
 	"dependencies": {
 		"@netlify/functions": "^5.3.0",
 		"@netlify/vite-plugin": "^2.12.9",
-		"@vite-deploy/internal-helpers": "^0.2.0",
+		"@vite-deploy/internal-helpers": "^0.2.1",
 		"cookie-es": "^3.1.1",
 		"srvx": "^0.12.5"
 	}
