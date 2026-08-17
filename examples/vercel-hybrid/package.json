@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@vite-deploy/vercel": "^0.2.0",
+		"@vite-deploy/vercel": "^0.2.1",
 		"typescript": "7.0.2",
 		"vite": "^8.2.1"
 	}

@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@vite-deploy/cloudflare": "^0.1.0",
+		"@vite-deploy/cloudflare": "^0.1.1",
 		"typescript": "7.0.2",
 		"vite": "^8.2.1",
 		"wrangler": "^4.123.0"

@@ -1,6 +1,6 @@
 {
 	"name": "@vite-deploy/vercel",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Deploy your Vite project to Vercel.",
 	"type": "module",
 	"sideEffects": false,
@@ -43,7 +43,7 @@
 		"typescript": "7.0.2"
 	},
 	"dependencies": {
-		"@vite-deploy/internal-helpers": "^0.2.0",
+		"@vite-deploy/internal-helpers": "^0.2.1",
 		"srvx": "^0.12.5"
 	}
 }

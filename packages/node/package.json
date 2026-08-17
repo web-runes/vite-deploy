@@ -1,6 +1,6 @@
 {
 	"name": "@vite-deploy/node",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Deploy your Vite project to hosts which support Node.js.",
 	"type": "module",
 	"sideEffects": false,
@@ -43,7 +43,7 @@
 		"typescript": "7.0.2"
 	},
 	"dependencies": {
-		"@vite-deploy/internal-helpers": "^0.2.0",
+		"@vite-deploy/internal-helpers": "^0.2.1",
 		"srvx": "^0.12.5"
 	}
 }

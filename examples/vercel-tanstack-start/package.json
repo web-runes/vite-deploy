@@ -23,7 +23,7 @@
 		"@types/node": "^25.9.5",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.4",
-		"@vite-deploy/vercel": "^0.2.0",
+		"@vite-deploy/vercel": "^0.2.1",
 		"@vitejs/plugin-react": "^6.0.5",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
