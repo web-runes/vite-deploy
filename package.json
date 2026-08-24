@@ -17,8 +17,8 @@
 		"ci:publish": "changeset publish"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.8",
-		"@changesets/cli": "3.0.0",
+		"@biomejs/biome": "2.5.10",
+		"@changesets/cli": "3.0.1",
 		"@changesets/changelog-github": "1.0.0",
 		"pkg-pr-new": "0.0.88"
 	}
