@@ -10,13 +10,13 @@
 		"start": "node dist/server/index.mjs"
 	},
 	"dependencies": {
-		"hono": "^4.13.2",
+		"hono": "^4.13.3",
 		"sirv": "^3.0.2",
-		"srvx": "^0.12.5"
+		"srvx": "^0.12.7"
 	},
 	"devDependencies": {
 		"@vite-deploy/node": "^0.0.6",
 		"typescript": "7.0.2",
-		"vite": "^8.2.1"
+		"vite": "^8.2.2"
 	}
 }

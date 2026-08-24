@@ -44,6 +44,6 @@
 	},
 	"dependencies": {
 		"@vite-deploy/internal-helpers": "^0.2.1",
-		"srvx": "^0.12.5"
+		"srvx": "^0.12.7"
 	}
 }
