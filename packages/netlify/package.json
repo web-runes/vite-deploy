@@ -43,7 +43,7 @@
 		"typescript": "7.0.2"
 	},
 	"dependencies": {
-		"@netlify/functions": "^5.3.0",
+		"@netlify/functions": "^6.0.0",
 		"@netlify/vite-plugin": "^2.12.9",
 		"@vite-deploy/internal-helpers": "^0.2.1",
 		"cookie-es": "^3.1.1",
