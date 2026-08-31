@@ -22,12 +22,12 @@
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/node": "^25.9.5",
 		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.4",
+		"@types/react-dom": "^19.2.5",
 		"@vite-deploy/cloudflare": "^0.1.1",
-		"@vitejs/plugin-react": "^6.1.0",
+		"@vitejs/plugin-react": "^6.1.1",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
 		"vite": "^8.2.2",
-		"wrangler": "^4.125.0"
+		"wrangler": "^4.127.1"
 	}
 }
