@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"@netlify/functions": "^6.0.0",
-		"@netlify/vite-plugin": "^2.12.9",
+		"@netlify/vite-plugin": "^3.0.1",
 		"@vite-deploy/internal-helpers": "^0.2.1",
 		"cookie-es": "^3.1.1",
 		"srvx": "^0.12.7"
