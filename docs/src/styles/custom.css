@@ -32,7 +32,7 @@
 	);
 }
 
-starlight-menu-button button {
+.sl-menu-button {
 	background-color: transparent;
 	color: var(--sl-color-text);
 	font-size: var(--sl-text-2xl);
