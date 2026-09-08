@@ -9,12 +9,12 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"hono": "^4.13.5"
+		"hono": "^4.13.7"
 	},
 	"devDependencies": {
 		"@vite-deploy/cloudflare": "^0.1.1",
 		"typescript": "7.0.2",
 		"vite": "^8.2.2",
-		"wrangler": "^4.127.1"
+		"wrangler": "^4.129.0"
 	}
 }
