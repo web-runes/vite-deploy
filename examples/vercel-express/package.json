@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"express": "^5.2.1",
-		"srvx": "^0.12.7"
+		"srvx": "^1.0.3"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.6",
