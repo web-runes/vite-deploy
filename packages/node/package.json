@@ -39,11 +39,11 @@
 		"vite": "^8.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^25.9.5",
+		"@types/node": "^25.9.6",
 		"typescript": "7.0.2"
 	},
 	"dependencies": {
 		"@vite-deploy/internal-helpers": "^0.2.1",
-		"srvx": "^1.0.3"
+		"srvx": "^1.0.4"
 	}
 }

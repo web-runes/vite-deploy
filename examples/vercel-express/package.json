@@ -10,12 +10,12 @@
 	},
 	"dependencies": {
 		"express": "^5.2.1",
-		"srvx": "^1.0.3"
+		"srvx": "^1.0.4"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.6",
 		"@vite-deploy/vercel": "^0.2.1",
 		"typescript": "7.0.2",
-		"vite": "^8.2.2"
+		"vite": "^8.3.0"
 	}
 }

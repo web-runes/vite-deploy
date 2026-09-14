@@ -12,11 +12,11 @@
 	"dependencies": {
 		"hono": "^4.13.7",
 		"sirv": "^3.0.2",
-		"srvx": "^1.0.3"
+		"srvx": "^1.0.4"
 	},
 	"devDependencies": {
 		"@vite-deploy/node": "^0.0.6",
 		"typescript": "7.0.2",
-		"vite": "^8.2.2"
+		"vite": "^8.3.0"
 	}
 }
