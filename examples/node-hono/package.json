@@ -10,9 +10,9 @@
 		"start": "node dist/server/index.mjs"
 	},
 	"dependencies": {
-		"hono": "^4.13.7",
+		"hono": "^4.13.8",
 		"sirv": "^3.0.2",
-		"srvx": "^1.0.4"
+		"srvx": "^1.0.5"
 	},
 	"devDependencies": {
 		"@vite-deploy/node": "^0.0.6",
