@@ -14,39 +14,39 @@ function isValidIcon(name: string): name is keyof typeof Icons {
 ---
 
 {data.type === "package" ? (
-    <div class="wrapper">
-      <h1 id="_top">
-        {isValidIcon(packageName) && <Icon name={packageName} />}
-        <span class="scope">@vite-deploy/</span>
-        <span>{packageName}</span>
-      </h1>
-      <div class="package-metadata">
-        <Version pkgName={data.title} />
-        <a href={data.githubURL}>
-          <Icon size="1rem" name="github" /> GitHub
-        </a>
-        <a href={`https://npmx.dev/package/${data.title}`}>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 576 512"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h64v-96h32v96h32V192zm160 0H192v160h64v-32h64V192zm224 0H352v128h64v-96h32v96h32v-96h32v96h32V192z" />
-          </svg>
-          npm
-        </a>
-        <a href={`${data.githubURL}CHANGELOG.md`}>
-          <Icon size="1rem" name="list-format" /> Changelog
-        </a>
-      </div>
-    </div>
-  ) : (
-    <Default>
-      <slot />
-    </Default>
-  )}
+	<div class="wrapper">
+		<h1 id="_top">
+			{isValidIcon(packageName) && <Icon name={packageName} />}
+			<span class="scope">@vite-deploy/</span>
+			<span>{packageName}</span>
+		</h1>
+		<div class="package-metadata">
+			<Version pkgName={data.title} />
+			<a href={data.githubURL}>
+				<Icon size="1rem" name="github" /> GitHub
+			</a>
+			<a href={`https://npmx.dev/package/${data.title}`}>
+				<svg
+					width="16"
+					height="16"
+					viewBox="0 0 576 512"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h64v-96h32v96h32V192zm160 0H192v160h64v-32h64V192zm224 0H352v128h64v-96h32v96h32v-96h32v96h32V192z" />
+				</svg>
+				npm
+			</a>
+			<a href={`${data.githubURL}CHANGELOG.md`}>
+				<Icon size="1rem" name="list-format" /> Changelog
+			</a>
+		</div>
+	</div>
+) : (
+	<Default>
+		<slot />
+	</Default>
+)}
 
 <style>
 .wrapper {

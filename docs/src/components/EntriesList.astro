@@ -18,10 +18,8 @@ if (entries.length === 0) {
 
 <ul>
 	{entries.map((entry) => (
-      <li>
-        <a href={`/${entry.id}/`}>
-          {entry.data.sidebar.label ?? entry.data.title}
-        </a>
-      </li>
-    ))}
+	<li>
+		<a href={`/${entry.id}/`}>{entry.data.sidebar.label ?? entry.data.title}</a>
+	</li>
+))}
 </ul>
