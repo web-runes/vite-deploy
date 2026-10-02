@@ -10,9 +10,9 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
-		"@tanstack/react-router": "^1.170.40",
+		"@tanstack/react-router": "^1.170.41",
 		"@tanstack/react-router-devtools": "^1.167.2",
-		"@tanstack/react-start": "1.168.59",
+		"@tanstack/react-start": "1.168.60",
 		"react": "^19.3.0",
 		"react-dom": "^19.3.0",
 		"tailwind-merge": "^2.6.1",
@@ -28,6 +28,6 @@
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2",
 		"vite": "^8.3.1",
-		"wrangler": "^4.144.0"
+		"wrangler": "^4.145.0"
 	}
 }
