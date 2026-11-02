@@ -1,4 +1,4 @@
-import type { PrerenderEntrypoint } from "@vite-deploy/cloudflare";
+import type { PrerenderEntrypoint } from "@vite-deploy/vercel";
 
 export default {
 	getStaticPaths() {
