@@ -9,13 +9,13 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"express": "^5.2.1",
-		"srvx": "^1.0.5"
+		"express": "^5.3.0",
+		"srvx": "^1.0.8"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.6",
 		"@vite-deploy/netlify": "^0.3.1",
 		"typescript": "7.0.2",
-		"vite": "^8.3.1"
+		"vite": "^8.3.5"
 	}
 }
