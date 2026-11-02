@@ -6,7 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!**/routeTree.gen.ts", "!**/*.svg"]
+		"includes": ["**", "!**/routeTree.gen.ts", "!**/CHANGELOG.md", "!**/*.svg"]
 	},
 	"formatter": {
 		"enabled": true,
